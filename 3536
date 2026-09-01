@@ -1,0 +1,31 @@
+class Solution {
+    public int maxProduct(int n) {
+        int[] freq = new int[10];
+
+        while (n > 0) {
+            freq[n % 10]++;
+            n /= 10;
+        }
+
+        int first = -1, second = -1;
+
+        for (int d = 9; d >= 0; d--) {
+            if (freq[d] > 0) {
+                first = d;
+                if (freq[d] >= 2) {
+                    second = d;
+                } else {
+                    for (int e = d - 1; e >= 0; e--) {
+                        if (freq[e] > 0) {
+                            second = e;
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+
+        return first * second;
+    }
+}
