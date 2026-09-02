@@ -1,0 +1,18 @@
+class Solution {
+    public boolean uniformArray(int[] nums1) {
+        return true;
+    }
+}
+
+
+or
+
+class Solution {
+    public boolean uniformArray(int[] nums1) {
+        int odd = 0;
+        for (int x : nums1) {
+            if ((odd += x & 1) > 1) return true;
+        }
+        return odd == 0 || odd == nums1.length || odd > 0;
+    }
+}
