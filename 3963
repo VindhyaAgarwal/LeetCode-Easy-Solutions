@@ -1,0 +1,19 @@
+class Solution {
+    public String[] createGrid(int m, int n) {
+        String[] result = new String[m];
+        
+        char[] top = new char[n];
+        java.util.Arrays.fill(top, '.');
+        result[0] = new String(top);
+        
+        char[] mid = new char[n];
+        java.util.Arrays.fill(mid, '#');
+        mid[n - 1] = '.';
+        String midStr = new String(mid);
+        for (int i = 1; i < m; i++) {
+            result[i] = midStr;
+        }
+        
+        return result;
+    }
+}
