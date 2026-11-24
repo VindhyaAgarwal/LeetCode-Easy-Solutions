@@ -1,0 +1,26 @@
+class Solution {
+    public int maxLength(int[] nums) {
+        int n = nums.length, best = 1;
+        int[] primes = {2, 3, 5, 7};
+        int[][] exp = new int[n][4];
+        for (int i = 0; i < n; i++)
+            for (int p = 0, v = nums[i]; p < 4; p++, v = nums[i])
+                while (v % primes[p] == 0) { exp[i][p]++; v /= primes[p]; }
+
+        for (int i = 0; i < n && n - i > best; i++) {
+            int s0=0,s1=0,s2=0,s3=0, m0=0,m1=0,m2=0,m3=0, n0=7,n1=7,n2=7,n3=7;
+            for (int j = i; j < n; j++) {
+                int a=exp[j][0], b=exp[j][1], c=exp[j][2], d=exp[j][3];
+                s0+=a; if(a>m0)m0=a; if(a<n0)n0=a;
+                s1+=b; if(b>m1)m1=b; if(b<n1)n1=b;
+                s2+=c; if(c>m2)m2=c; if(c<n2)n2=c;
+                s3+=d; if(d>m3)m3=d; if(d<n3)n3=d;
+                if (s0==m0+n0 && s1==m1+n1 && s2==m2+n2 && s3==m3+n3)
+                    best = Math.max(best, j - i + 1);
+                else if ((s0>m0+n0 && n0==0) || (s1>m1+n1 && n1==0) || (s2>m2+n2 && n2==0) || (s3>m3+n3 && n3==0))
+                    break;
+            }
+        }
+        return best;
+    }
+}
